@@ -2,32 +2,25 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
+  ManyToOne,
+  JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
 
-import Post from "./Post";
+import User from "./User";
 
-@Entity("users")
-class User {
+@Entity("posts")
+class Post {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
-  name: string;
+  content: string;
 
-  @Column({ unique: true })
-  email: string;
-
-  @Column({ unique: true })
-  username: string;
-
-  @Column()
-  password: string;
-
-  @OneToMany((type) => Post, (post) => post.user)
-  posts: Post[];
+  @ManyToOne((type) => User, (user) => user.posts, { nullable: false })
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
   @CreateDateColumn({ type: "timestamp with time zone" })
   created_at: Date;
@@ -36,4 +29,4 @@ class User {
   updated_at: Date;
 }
 
-export default User;
+export default Post;
