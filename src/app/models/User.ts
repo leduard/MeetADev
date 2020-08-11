@@ -17,13 +17,13 @@ class User {
   @Column()
   name: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, select: false })
   email: string;
 
   @Column({ unique: true })
   username: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @OneToMany((type) => Post, (post) => post.user)

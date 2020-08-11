@@ -25,7 +25,10 @@ class CreateSessionService {
   }: CreateSessionRequest): Promise<CreateSessionResponse> {
     const userRepo = getRepository(User);
 
-    const user = await await userRepo.findOne({ where: { username } });
+    const user = await await userRepo.findOne({
+      select: ["id", "username", "password"],
+      where: { username },
+    });
 
     if (!user) throw new AppError("Username or password incorrect", 401);
 
