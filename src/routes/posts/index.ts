@@ -4,6 +4,7 @@ import { getCustomRepository, getRepository } from "typeorm";
 import Post from "../../app/models/Post";
 
 import CreatePostService from "../../app/services/posts/CreatePostService";
+import DeletePostService from "../../app/services/posts/DeletePostService";
 
 import CustomPostRepository from "../../app/repositories/PostRepository";
 
@@ -44,13 +45,11 @@ postsRouter.post("/", async (request, response) => {
 
 postsRouter.delete("/:id", async (request, response) => {
   try {
+    const deletePost = new DeletePostService();
     const { id } = request.params;
+    const { id: authenticated_user } = request.user;
 
-    const postRepo = getRepository(Post);
-
-    const { affected } = await postRepo.delete({ id });
-
-    if (!affected) throw new AppError("Post not found");
+    await deletePost.execute({ id, authenticated_user });
 
     return response.status(200).send();
   } catch (err) {
