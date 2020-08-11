@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { getCustomRepository, getRepository } from "typeorm";
 
-import Post from "../../models/Post";
+import Post from "../../app/models/Post";
 
-import CreatePostService from "../../services/posts/CreatePostService";
+import CreatePostService from "../../app/services/posts/CreatePostService";
 
-import CustomPostRepository from "../../repositories/PostRepository";
+import CustomPostRepository from "../../app/repositories/PostRepository";
 
-import AppError from "../../errors/appError";
-import AuthMiddleware from "../../middleware/auth";
+import AppError from "../../app/errors/appError";
+import AuthMiddleware from "../../app/middleware/auth";
 
 const postsRouter = Router();
 

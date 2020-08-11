@@ -6,7 +6,7 @@ import AppError from "../errors/appError";
 
 import User from "../models/User";
 
-import authConfig from "../config/auth";
+import authConfig from "../../config/auth";
 
 interface CreateSessionRequest {
   username: string;

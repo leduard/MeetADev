@@ -2,7 +2,7 @@ import "dotenv/config";
 import "reflect-metadata";
 import express, { Request, Response, NextFunction } from "express";
 
-import AppError from "./errors/appError";
+import AppError from "./app/errors/appError";
 
 import routes from "./routes";
 import "./database";
