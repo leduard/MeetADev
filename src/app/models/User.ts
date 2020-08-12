@@ -3,11 +3,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
+  RelationCount,
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
 
 import Post from "./Post";
+import Follow from "./Follow";
 
 @Entity("users")
 class User {
@@ -28,6 +30,18 @@ class User {
 
   @OneToMany((type) => Post, (post) => post.user)
   posts: Post[];
+
+  @OneToMany((type) => Follow, (follow) => follow.follower)
+  following: User[];
+
+  @OneToMany((type) => Follow, (follow) => follow.user)
+  followers: User[];
+
+  @RelationCount((user: User) => user.followers)
+  followers_count: number;
+
+  @RelationCount((user: User) => user.following)
+  following_count: number;
 
   @CreateDateColumn({ type: "timestamp with time zone" })
   created_at: Date;
