@@ -1,9 +1,9 @@
 import { getRepository } from "typeorm";
 
-import AppError from "../errors/appError";
+import AppError from "../../errors/appError";
 
-import Follow from "../models/Follow";
-import User from "../models/User";
+import Follow from "../../models/Follow";
+import User from "../../models/User";
 
 interface CreateFollowRequest {
   username: string;
@@ -14,7 +14,7 @@ class CreateFollowService {
   public async execute({
     username,
     authenticated_user,
-  }: CreateFollowRequest): Promise<{}> {
+  }: CreateFollowRequest): Promise<Follow> {
     const followRepo = getRepository(Follow);
     const userRepo = getRepository(User);
 
