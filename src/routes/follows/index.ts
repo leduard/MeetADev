@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { getCustomRepository } from "typeorm";
 
-import CreateFollowService from "../../app/services/CreateFollowService";
+import CreateFollowService from "../../app/services/follows/CreateFollowService";
+import DeleteFollowService from "../../app/services/follows/DeleteFollowService";
 
 import CustomFollowRepository from "../../app/repositories/FollowRepository";
 
@@ -56,6 +57,21 @@ followsRouter.post("/:username", async (request, response) => {
     const follow = await createFollow.execute({ username, authenticated_user });
 
     return response.json(follow);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
+});
+
+followsRouter.delete("/:username", async (request, response) => {
+  try {
+    const { username } = request.params;
+    const { id: authenticated_user } = request.user;
+
+    const deleteFollow = new DeleteFollowService();
+
+    await deleteFollow.execute({ username, authenticated_user });
+
+    return response.status(200).send();
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
