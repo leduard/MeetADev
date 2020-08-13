@@ -1,30 +1,17 @@
 {
   "name": "lesocial",
   "version": "0.0.1",
-  "main": "src/server.ts",
+  "main": "index.js",
+  "repository": "https://github.com/leduard/lesocial.git",
+  "author": "leduard <luizeduardo.patos@gmail.com>",
   "license": "MIT",
-  "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
-  },
-  "author": {
-    "name": "Eduardo",
-    "url": "https://github.com/leduard"
+  "private": "true",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/express": "^4.17.7",
-    "@types/jsonwebtoken": "^8.5.0",
-    "ts-node-dev": "^1.0.0-pre.56",
     "typescript": "^3.9.7"
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "pg": "^8.3.0",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.25"
   }
 }
