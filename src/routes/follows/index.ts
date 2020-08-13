@@ -36,10 +36,10 @@ followsRouter.get("/:username/following", async (request, response) => {
 
     const followRepo = getCustomRepository(CustomFollowRepository);
 
-    const userFollowers = await followRepo.getFollowing(
+    const userFollowers = await followRepo.getFollowing({
       username,
-      parseInt(page as any) || 1
-    );
+      page: parseInt(page as any) || 1,
+    });
 
     return response.json(userFollowers);
   } catch (err) {
