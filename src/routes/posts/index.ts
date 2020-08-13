@@ -17,10 +17,15 @@ postsRouter.use(AuthMiddleware);
 
 postsRouter.get("/", async (request, response) => {
   try {
-    const postsRepo = getCustomRepository(CustomPostRepository);
     let { page } = request.query;
+    const { id: authenticated_user } = request.user;
 
-    const posts = await postsRepo.all(parseInt(page as any) || 1);
+    const postsRepo = getCustomRepository(CustomPostRepository);
+
+    const posts = await postsRepo.all(
+      parseInt(page as any) || 1,
+      authenticated_user
+    );
 
     return response.json(posts);
   } catch (err) {
