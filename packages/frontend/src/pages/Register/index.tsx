@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiLogIn } from 'react-icons/fi';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import { Container, Content, Image, CreateAccount, Forgot } from './styles';
 
@@ -11,15 +11,20 @@ const Register: React.FC = () => {
         <form>
           <h1>Crie sua conta!</h1>
 
-          <input placeholder="username" />
-          <input type="password" placeholder="password" />
+          <input placeholder="nome" />
+          <input placeholder="usuário" />
+          <input placeholder="email" />
+          <div>
+            <input type="password" placeholder="senha" />
+            <input type="password" placeholder="confirmar senha" />
+          </div>
 
-          <button type="button">Criar</button>
+          <button type="button">criar</button>
         </form>
 
         <CreateAccount to="/login">
-          <FiLogIn />
-          Já tenho uma conta!
+          <FiArrowLeft />
+          já tenho uma conta!
         </CreateAccount>
       </Content>
     </Container>

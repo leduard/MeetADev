@@ -10,19 +10,19 @@ const Login: React.FC = () => {
         <form>
           <h1>Faça seu login!</h1>
 
-          <input placeholder="username" />
-          <input type="password" placeholder="password" />
+          <input placeholder="usuário" />
+          <input type="password" placeholder="senha" />
 
-          <button type="button">Entrar</button>
+          <button type="button">entrar</button>
 
           <div>
-            <Forgot to="/">Esqueceu sua senha?</Forgot>
+            <Forgot to="/">esqueceu sua senha?</Forgot>
           </div>
         </form>
 
         <CreateAccount to="/register">
           <FiLogIn />
-          Criar uma conta
+          criar uma conta
         </CreateAccount>
       </Content>
       <Image />

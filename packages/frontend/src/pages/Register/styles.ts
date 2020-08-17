@@ -25,7 +25,7 @@ export const Content = styled.div`
 
   form {
     margin: 80px 0;
-    width: 320px;
+    width: 325px;
     text-align: center;
 
     h1 {
@@ -60,6 +60,7 @@ export const Content = styled.div`
       background-color: #02c76b;
 
       margin-top: 15px;
+      font-weight: 500;
 
       transition: background-color 0.2s;
       &:hover {
@@ -69,6 +70,15 @@ export const Content = styled.div`
 
     div {
       margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      input {
+        width: 49%;
+        margin-top: 0;
+      }
     }
   }
 `;

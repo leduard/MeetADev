@@ -60,6 +60,7 @@ export const Content = styled.div`
       background-color: #02c76b;
 
       margin-top: 15px;
+      font-weight: 500;
 
       transition: background-color 0.2s;
       &:hover {
