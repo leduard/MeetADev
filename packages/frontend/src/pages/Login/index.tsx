@@ -18,7 +18,7 @@ const Login: React.FC = () => {
     <Container>
       <ReactModal
         isOpen={forgotPassModalOpen}
-        onRequestClose={() => setForgotPassModalOpen(false)}
+        onRequestClose={(): void => setForgotPassModalOpen(false)}
         style={ModalStyle}
       >
         <h1 style={{ textAlign: 'center' }}>Opsss!</h1>
@@ -42,7 +42,10 @@ const Login: React.FC = () => {
           <button type="button">entrar</button>
 
           <div>
-            <Forgot to="/login" onClick={() => setForgotPassModalOpen(true)}>
+            <Forgot
+              to="/login"
+              onClick={(): void => setForgotPassModalOpen(true)}
+            >
               esqueceu sua senha?
             </Forgot>
           </div>
