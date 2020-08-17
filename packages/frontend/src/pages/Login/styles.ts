@@ -109,3 +109,22 @@ export const CreateAccount = styled(Link)`
     margin-right: 10px;
   }
 `;
+
+export const ModalStyle = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    border: 'none',
+  },
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-20%',
+    maxWidth: 400,
+    border: 'none',
+    borderRadius: 10,
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#edebeb',
+  },
+};
