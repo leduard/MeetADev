@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 
-import { Container, Content, Image, CreateAccount, Forgot } from './styles';
+import { Container, Content, Image, Login } from './styles';
 
 const Register: React.FC = () => {
   return (
@@ -22,10 +22,10 @@ const Register: React.FC = () => {
           <button type="button">criar</button>
         </form>
 
-        <CreateAccount to="/login">
+        <Login to="/login">
           <FiArrowLeft />
           já tenho uma conta!
-        </CreateAccount>
+        </Login>
       </Content>
     </Container>
   );

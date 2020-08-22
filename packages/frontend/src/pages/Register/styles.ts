@@ -91,18 +91,7 @@ export const Image = styled.div`
   background-size: cover;
 `;
 
-export const Forgot = styled(Link)`
-  color: #edebeb;
-  text-decoration: none;
-  font-weight: 400;
-  transition: color 0.2s;
-
-  &:hover {
-    color: ${shade(0.3, '#edebeb')};
-  }
-`;
-
-export const CreateAccount = styled(Link)`
+export const Login = styled(Link)`
   color: #02c76b;
   text-decoration: none;
   font-weight: 500;
