@@ -1,15 +1,39 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { FiHome, FiSettings } from 'react-icons/fi';
 
-import { Container, ProfileImage, NavButtons, NavLink, Logout } from './styles';
+import {
+  Container,
+  ProfileImage,
+  IconImageButton,
+  NavButtons,
+  NavLink,
+  Logout,
+} from './styles';
 
-const Header: React.FC = () => {
+import Icon from '../../assets/icon.svg';
+
+interface HeaderComponent {
+  showAppIcon?: boolean;
+}
+
+const Header: React.FC<HeaderComponent> = ({
+  showAppIcon,
+}: HeaderComponent) => {
+  const history = useHistory();
+
   return (
     <Container>
       <div>
-        <ProfileImage>
-          <h1>L</h1>
-        </ProfileImage>
+        {!showAppIcon ? (
+          <ProfileImage>
+            <h1>L</h1>
+          </ProfileImage>
+        ) : (
+          <IconImageButton onClick={(): void => history.push('/')}>
+            <img src={Icon} alt="appIcon" />
+          </IconImageButton>
+        )}
       </div>
       <NavButtons>
         <NavLink to="/">

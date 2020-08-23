@@ -43,6 +43,11 @@ export const ProfileImage = styled.div`
   }
 `;
 
+export const IconImageButton = styled.button`
+  background: none;
+  border: none;
+`;
+
 export const NavLink = styled(Link)`
   text-decoration: none;
   display: flex;
