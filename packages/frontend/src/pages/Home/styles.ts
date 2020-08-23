@@ -9,7 +9,7 @@ export const Container = styled.div`
   display: flex;
   align-items: stretch;
 
-  color: #fff7f8;
+  color: #edebeb;
 `;
 
 export const App = styled.div`
