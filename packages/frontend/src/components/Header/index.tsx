@@ -11,6 +11,8 @@ import {
   Logout,
 } from './styles';
 
+import { useAuth } from '../../context/Auth';
+
 import Icon from '../../assets/icon.svg';
 
 interface HeaderComponent {
@@ -21,6 +23,7 @@ const Header: React.FC<HeaderComponent> = ({
   showAppIcon,
 }: HeaderComponent) => {
   const history = useHistory();
+  const { signOut } = useAuth();
 
   return (
     <Container>
@@ -45,7 +48,7 @@ const Header: React.FC<HeaderComponent> = ({
           ajustes
         </NavLink>
       </NavButtons>
-      <Logout />
+      <Logout onClick={() => signOut()} />
     </Container>
   );
 };
