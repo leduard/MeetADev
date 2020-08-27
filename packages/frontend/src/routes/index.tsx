@@ -13,6 +13,7 @@ const Routes: React.FC = () => (
     <Route path="/login" exact component={Login} />
     <Route path="/register" exact component={Register} />
     <Route path="/settings" exact component={Settings} />
+    <Route path="/:username/s/:post_id" component={() => <h1>post</h1>} />
     <Route path="/:username" component={Profile} />
   </Switch>
 );

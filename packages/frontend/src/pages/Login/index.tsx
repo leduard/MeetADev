@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { Redirect } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import { FiLogIn } from 'react-icons/fi';
 
@@ -11,10 +12,33 @@ import {
   Forgot,
 } from './styles';
 
+import { useAuth } from '../../context/Auth';
+
 const Login: React.FC = () => {
   const [forgotPassModalOpen, setForgotPassModalOpen] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  return (
+  const {
+    signIn,
+    user: { user },
+  } = useAuth();
+
+  const handleSubmit = useCallback(async () => {
+    if (
+      username === '' ||
+      username === ' ' ||
+      password === '' ||
+      password === ' '
+    )
+      return;
+
+    const res = await signIn(username, password);
+  }, [signIn]); //eslint-disable-line
+
+  return user ? (
+    <Redirect to="/home" />
+  ) : (
     <Container>
       <ReactModal
         isOpen={forgotPassModalOpen}
@@ -36,10 +60,19 @@ const Login: React.FC = () => {
         <form>
           <h1>Faça seu login!</h1>
 
-          <input placeholder="usuário" />
-          <input type="password" placeholder="senha" />
+          <input
+            placeholder="usuário"
+            onChange={(e): void => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="senha"
+            onChange={(e): void => setPassword(e.target.value)}
+          />
 
-          <button type="button">entrar</button>
+          <button type="button" onClick={(): Promise<void> => handleSubmit()}>
+            entrar
+          </button>
 
           <div>
             <Forgot
