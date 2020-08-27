@@ -32,9 +32,8 @@ const Login: React.FC = () => {
       password === ' '
     )
       return;
-
     const res = await signIn(username, password);
-  }, [signIn]); //eslint-disable-line
+  }, [signIn, username, password]); //eslint-disable-line
 
   return user ? (
     <Redirect to="/home" />
