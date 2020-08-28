@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 import { Link } from 'react-router-dom';
 
@@ -33,6 +33,12 @@ export const Content = styled.div`
       font-weight: 500;
     }
 
+    h5 {
+      margin-bottom: 30px;
+      font-weight: 500;
+      color: #da2f3a;
+    }
+
     input {
       padding: 5px 10px;
       height: 42px;
@@ -54,6 +60,10 @@ export const Content = styled.div`
       padding: 5px 10px;
       height: 42px;
       width: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       border-radius: 10px;
       border: 0;
@@ -128,3 +138,27 @@ export const ModalStyle = {
     backgroundColor: '#edebeb',
   },
 };
+
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Spinner = styled.div`
+  margin: 0 !important;
+  animation: ${rotate360} 1s linear infinite;
+  transform: translateZ(0);
+
+  border-top: 2px solid #0a0a0a;
+  border-right: 2px solid #0a0a0a;
+  border-bottom: 2px solid #0a0a0a;
+  border-left: 2px solid transparent;
+  background: transparent;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+`;

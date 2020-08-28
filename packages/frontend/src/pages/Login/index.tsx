@@ -10,12 +10,17 @@ import {
   Image,
   CreateAccount,
   Forgot,
+  Spinner,
 } from './styles';
 
 import { useAuth } from '../../context/Auth';
 
 const Login: React.FC = () => {
   const [forgotPassModalOpen, setForgotPassModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<{ error: string; status: number } | null>(
+    null,
+  );
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,7 +37,14 @@ const Login: React.FC = () => {
       password === ' '
     )
       return;
+
+    setLoading(true);
+
     const res = await signIn(username, password);
+
+    if (res) setError(res);
+
+    setLoading(false);
   }, [signIn, username, password]); //eslint-disable-line
 
   return user ? (
@@ -56,8 +68,14 @@ const Login: React.FC = () => {
       </ReactModal>
 
       <Content>
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <h1>Faça seu login!</h1>
+          {error && <h5>{error.error}</h5>}
 
           <input
             placeholder="usuário"
@@ -69,9 +87,7 @@ const Login: React.FC = () => {
             onChange={(e): void => setPassword(e.target.value)}
           />
 
-          <button type="button" onClick={(): Promise<void> => handleSubmit()}>
-            entrar
-          </button>
+          <button type="submit">{!loading ? 'entrar' : <Spinner />}</button>
 
           <div>
             <Forgot

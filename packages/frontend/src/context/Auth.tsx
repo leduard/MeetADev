@@ -11,9 +11,14 @@ interface UserData {
   token: string;
 }
 
+interface AuthError {
+  error: string;
+  status: number;
+}
+
 interface AuthContextState {
   user: UserData;
-  signIn(username: string, password: string): Promise<void>;
+  signIn(username: string, password: string): Promise<void | AuthError>;
   signOut(): void;
 }
 
@@ -31,13 +36,24 @@ export const AuthProvider: React.FC = ({ children }) => {
   );
 
   const signIn = useCallback(async (username, password) => {
-    const { data }: { data: UserData } = await api.post('/sessions', {
-      username,
-      password,
-    });
+    try {
+      const { data }: { data: UserData } = await api.post('/sessions', {
+        username,
+        password,
+      });
 
-    localStorage.setItem('@lesocial:user', JSON.stringify(data));
-    setUser(data);
+      localStorage.setItem('@lesocial:user', JSON.stringify(data));
+      setUser(data);
+
+      return undefined;
+    } catch (err) {
+      const {
+        data: { error },
+        status,
+      } = err.response;
+
+      return { error, status };
+    }
   }, []);
 
   const signOut = useCallback(() => {
