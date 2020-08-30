@@ -18,7 +18,7 @@ import { useAuth } from '../../context/Auth';
 
 const Login: React.FC = () => {
   const [forgotPassModalOpen, setForgotPassModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<{ error: string; status: number } | null>(
     null,
   );
