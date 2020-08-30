@@ -73,8 +73,14 @@ export const Content = styled.div`
       font-weight: 500;
 
       transition: background-color 0.2s;
+
       &:hover {
         background-color: ${shade(0.3, '#02c76b')};
+      }
+
+      &:disabled {
+        cursor: default;
+        background-color: ${shade(0.5, '#02c76b')};
       }
     }
 

@@ -87,7 +87,9 @@ const Login: React.FC = () => {
             onChange={(e): void => setPassword(e.target.value)}
           />
 
-          <button type="submit">{!loading ? 'entrar' : <Spinner />}</button>
+          <button type="submit" disabled={loading}>
+            {!loading ? 'entrar' : <Spinner />}
+          </button>
 
           <div>
             <Forgot
