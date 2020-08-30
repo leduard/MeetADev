@@ -1,6 +1,7 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { shade } from 'polished';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import backgroundSvg from '../../assets/background.svg';
 
@@ -11,6 +12,41 @@ export const Container = styled.div`
   align-items: stretch;
 
   color: #fff7f8;
+`;
+
+export const StyledToastContainer = styled(ToastContainer).attrs({
+  toastClassName: 'toast',
+  progressClassName: 'progress',
+})`
+  width: 320px;
+  color: #0a0a0a;
+
+  h3,
+  h5 {
+    font-family: 'Maven Pro', sans-serif;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  h5 {
+    font-weight: 400;
+  }
+
+  .toast {
+    background-color: #02c76b;
+  }
+
+  .progress {
+    background-color: #edebeb;
+  }
+
+  button[aria-label='close'] {
+    color: #0a0a0a;
+  }
 `;
 
 export const Content = styled.div`

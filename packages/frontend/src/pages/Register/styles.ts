@@ -13,6 +13,26 @@ export const Container = styled.div`
   color: #fff7f8;
 `;
 
+export const StyledToastContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h3,
+  h5 {
+    font-family: 'Maven Pro', sans-serif;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  h5 {
+    font-weight: 400;
+  }
+`;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,6 +75,10 @@ export const Content = styled.div`
       height: 42px;
       width: 100%;
 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       border-radius: 10px;
       border: 0;
       background-color: #02c76b;
@@ -63,8 +87,14 @@ export const Content = styled.div`
       font-weight: 500;
 
       transition: background-color 0.2s;
+
       &:hover {
         background-color: ${shade(0.3, '#02c76b')};
+      }
+
+      &:disabled {
+        cursor: default;
+        background-color: ${shade(0.5, '#02c76b')};
       }
     }
 

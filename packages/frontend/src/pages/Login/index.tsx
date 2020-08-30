@@ -1,11 +1,13 @@
-import React, { useState, useCallback } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useCallback, useEffect } from 'react';
+import { Redirect, useLocation } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import { FiLogIn } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 import {
   Container,
   ModalStyle,
+  StyledToastContainer,
   Content,
   Image,
   CreateAccount,
@@ -24,6 +26,8 @@ const Login: React.FC = () => {
   );
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const { state }: { state: { success: true } | undefined } = useLocation();
 
   const {
     signIn,
@@ -48,10 +52,25 @@ const Login: React.FC = () => {
     setLoading(false);
   }, [signIn, username, password]); //eslint-disable-line
 
+  useEffect(() => {
+    if (state?.success) toast.success(<h3>Conta criada com sucesso!</h3>);
+  }, [state]);
+
   return user ? (
     <Redirect to="/home" />
   ) : (
     <Container>
+      <StyledToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <ReactModal
         isOpen={forgotPassModalOpen}
         onRequestClose={(): void => setForgotPassModalOpen(false)}
