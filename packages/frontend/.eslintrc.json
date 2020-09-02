@@ -23,12 +23,34 @@
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "import/no-duplicates": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "import/prefer-default-export": "off",
-
+    "camelcase": [
+      "error",
+      {
+        "allow": [
+          "created_at",
+          "updated_at",
+          "followers_count",
+          "following_count"
+        ]
+      }
+    ],
+    "@typescript-eslint/camelcase": [
+      "error",
+      {
+        "allow": [
+          "created_at",
+          "updated_at",
+          "followers_count",
+          "following_count"
+        ]
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
