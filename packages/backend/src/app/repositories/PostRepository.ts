@@ -41,7 +41,9 @@ class PostRepository extends Repository<Post> {
         {
           followers: followingUsersIds,
         }
-      )
+      ).orWhere('user.id = :authenticated_user_id', { 
+          authenticated_user_id: authenticated_user
+      })
       .addOrderBy("posts.created_at", "DESC")
       .skip(page * itemsPerPage - itemsPerPage)
       .take(itemsPerPage)
