@@ -24,9 +24,10 @@ interface PostInterface {
 
 interface PostsListComponent {
   contentRef: React.RefObject<HTMLDivElement>;
+  username?: string;
 }
 
-const PostsList: React.FC<PostsListComponent> = ({ contentRef }) => {
+const PostsList: React.FC<PostsListComponent> = ({ contentRef, username }) => {
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(false);
   const [posts, setPosts] = useState<PostInterface[]>([]);
@@ -44,11 +45,14 @@ const PostsList: React.FC<PostsListComponent> = ({ contentRef }) => {
 
       setLoading(!isFetch);
 
-      const { status, data } = await api.get(`/posts?page=${page}`, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
+      const { status, data } = await api.get(
+        `/posts${username ? `/${username}?page=${page}` : `?page=${page}`}`,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
         },
-      });
+      );
 
       if (status === 200) {
         setCurrentPage(page + 1);

@@ -29,7 +29,79 @@ export const Content = styled.div`
   align-items: center;
   max-width: 520px;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
+`;
+
+export const ProfileCard = styled.div`
+  min-height: 100px;
+  padding: 0px 5px;
+  display: flex;
+  align-self: stretch;
+  justify-self: stretch;
+  margin-top: 65px;
+
+  span {
+    align-self: flex-end;
+
+    svg:hover {
+      cursor: pointer;
+      color: #02c76b;
+    }
+  }
+`;
+
+export const ProfileImage = styled.div`
+  min-height: 80px;
+  min-width: 80px;
+
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+
+  border: 1px solid #0a0a0a;
+  border-radius: 40px;
+
+  background-color: #02c76b;
+  color: #0a0a0a;
+  font-weight: bold;
+  font-size: 48px;
+`;
+
+export const ProfileContent = styled.div`
+  padding: 5px 0px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 30px;
+
+  > span {
+    display: flex;
+    align-self: start;
+
+    h5 + h5 {
+      margin-left: 20px;
+    }
+
+    h5 {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  > div {
+    h3 {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    h5 {
+      font-size: 12px;
+      font-weight: bold;
+      color: #acacac;
+    }
+  }
 `;
 
 export const Image = styled.div`
