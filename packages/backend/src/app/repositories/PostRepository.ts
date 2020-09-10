@@ -1,6 +1,7 @@
-import { EntityRepository, Repository, getCustomRepository } from "typeorm";
+import { EntityRepository, Repository, getCustomRepository, getRepository } from "typeorm";
 
 import Post from "../models/Post";
+import User from "../models/User";
 
 import CustomFollowRepository from "../../app/repositories/FollowRepository";
 
@@ -41,7 +42,7 @@ class PostRepository extends Repository<Post> {
           followers: followingUsersIds,
         }
       )
-      .addOrderBy("posts.created_at", "ASC")
+      .addOrderBy("posts.created_at", "DESC")
       .skip(page * itemsPerPage - itemsPerPage)
       .take(itemsPerPage)
       .getManyAndCount();
@@ -61,6 +62,31 @@ class PostRepository extends Repository<Post> {
     };
 
     return allPosts.length ? response : {};
+  }
+
+  public async getByUsename(page: number = 1, username: string) {
+    const itemsPerPage = parseInt(process.env.ROUTES_ITEMS_PER_PAGE as any);
+    page = page.toString() === "" ? 1 : page;
+
+    const userRepo = getRepository(User);
+    const user = await userRepo.findOne({username})
+
+    let [allPosts, postsCount] = await this.findAndCount({
+      where: { user },
+      relations: ["user"],
+      order: { created_at: "DESC" },
+      take: itemsPerPage,
+      skip: page * itemsPerPage - itemsPerPage,
+    });
+
+    const response: AllRepositoryResponse = {
+      postsCount,
+      currentPage: page,
+      itemsPerPage,
+      posts: allPosts,
+    };
+
+    return allPosts.length ? response : {};;
   }
 }
 

@@ -33,6 +33,24 @@ postsRouter.get("/", async (request, response) => {
   }
 });
 
+postsRouter.get("/:username", async (request, response) => {
+  try {
+    let { page } = request.query;
+    const { username } = request.params;
+
+    const postsRepo = getCustomRepository(CustomPostRepository);
+
+    const posts = await postsRepo.getByUsename(
+      parseInt(page as any) || 1,
+      username
+    );
+
+    return response.json(posts);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
+});
+
 postsRouter.post("/", async (request, response) => {
   try {
     const { content } = request.body;
