@@ -28,7 +28,7 @@ class User {
   @Column({ select: false })
   password: string;
 
-  @OneToMany((type) => Post, (post) => post.user)
+  @OneToMany((type) => Post, (post) => post.user, { onDelete: 'CASCADE' })
   posts: Post[];
 
   @OneToMany((type) => Follow, (follow) => follow.follower)
