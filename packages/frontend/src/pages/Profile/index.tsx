@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FiUserPlus } from 'react-icons/fi';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { FiUserPlus, FiUserMinus } from 'react-icons/fi';
 import { useLocation } from 'react-router-dom';
 
 import {
@@ -32,11 +32,13 @@ const Profile: React.FC = () => {
   const [user, setUser] = useState<User>({} as User);
   const [userFound, setUserFound] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [following, setFollowing] = useState(true);
 
   const username = useLocation().pathname.replace('/', '');
   const {
     user: {
       user: { username: signedUser },
+      token,
     },
   } = useAuth();
 
@@ -54,6 +56,34 @@ const Profile: React.FC = () => {
 
     getUser();
   }, []); // eslint-disable-line
+
+  const handleFollow = useCallback(async () => {
+    try {
+      const { data, status } = await api.post(`/follows/${username}`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (status === 200 && data.id) setFollowing(true);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [token, username]);
+
+  const handleUnfollow = useCallback(async () => {
+    try {
+      const { status } = await api.delete(`/follows/${username}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (status === 200) setFollowing(false);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [token, username]);
 
   return (
     <Container>
@@ -84,7 +114,11 @@ const Profile: React.FC = () => {
                   </ProfileContent>
                   {signedUser !== username && (
                     <span>
-                      <FiUserPlus size={24} />
+                      {!following ? (
+                        <FiUserPlus size={24} onClick={handleFollow} />
+                      ) : (
+                        <FiUserMinus size={24} onClick={handleUnfollow} />
+                      )}
                     </span>
                   )}
                 </ProfileCard>

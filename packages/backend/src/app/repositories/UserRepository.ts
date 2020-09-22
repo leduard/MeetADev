@@ -7,7 +7,7 @@ class UserRepository extends Repository<User> {
   public async getUser(username: string): Promise<User | undefined> {
     const user = await this.findOne({
       select: ["id", "name", "username", "created_at"],
-      loadEagerRelations: true,
+      // loadEagerRelations: true,
       where: { username },
     });
 

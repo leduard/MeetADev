@@ -5,6 +5,8 @@ import CreateUserService from "../../app/services/CreateUserService";
 
 import CustomUserRepository from "../../app/repositories/UserRepository";
 
+import AuthMiddleware from "../../app/middleware/auth";
+
 const usersRouter = Router();
 
 usersRouter.get("/:username", async (request, response) => {
