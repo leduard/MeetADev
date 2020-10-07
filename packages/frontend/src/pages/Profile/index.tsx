@@ -47,9 +47,18 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const getUser = async () => {
       const { data } = await api.get(`/users/${username}`);
+      const { data: isFollowingData } = await api.get(
+        `/follows/${signedUser}/follow/${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
       if (!data.id) setUserFound(false);
 
+      setFollowing(isFollowingData.following);
       setUser(data);
       setLoading(false);
     };
