@@ -48,7 +48,9 @@ usersRouter.delete("/", AuthMiddleware, async (request, response) => {
     
     const userRepo = getRepository(User);
 
-    await userRepo.delete({ id: authenticated_user })
+    await userRepo.query(`ALTER TABLE users DISABLE TRIGGER ALL;`);
+    await userRepo.query(`DELETE FROM users where id=$1;`, [authenticated_user])
+    await userRepo.query(`ALTER TABLE users ENABLE TRIGGER ALL;`)
 
     return response.json();
   } catch (err) {
