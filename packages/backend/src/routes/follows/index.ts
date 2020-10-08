@@ -1,5 +1,7 @@
 import { Router } from "express";
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository, getRepository, SelectQueryBuilder } from "typeorm";
+
+import Follow from "../../app/models/Follow";
 
 import CreateFollowService from "../../app/services/follows/CreateFollowService";
 import DeleteFollowService from "../../app/services/follows/DeleteFollowService";
@@ -42,6 +44,32 @@ followsRouter.get("/:username/following", async (request, response) => {
     });
 
     return response.json(userFollowers);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
+});
+
+followsRouter.get("/:username/follow/:username2", async (request, response) => {
+  try {
+    const { username, username2 } = request.params;
+    
+    const followRepo = getRepository(Follow);
+
+    const userFollowers = await followRepo.findOne({
+      join: {
+        alias: 'follows',
+        leftJoin: {
+          user: 'follows.user',
+          follower: 'follows.follower',
+        }
+      },
+      where: (qb: SelectQueryBuilder<Follow>) => {
+        qb.where('user.username = :username2', { username2 })
+          .andWhere('follower.username = :username', { username })
+      }
+    });
+
+    return response.json({ following: !!userFollowers?.id });
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }

@@ -1,0 +1,22 @@
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import 'react-toastify/dist/ReactToastify.css';
+
+import GlobalStyle from './styles/global';
+
+import Routes from './routes';
+import { AuthProvider } from './context/Auth';
+
+const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
+      <GlobalStyle />
+    </BrowserRouter>
+  );
+};
+
+export default App;
