@@ -25,9 +25,14 @@ interface PostInterface {
 interface PostsListComponent {
   contentRef: React.RefObject<HTMLDivElement>;
   username?: string;
+  reload?: number;
 }
 
-const PostsList: React.FC<PostsListComponent> = ({ contentRef, username }) => {
+const PostsList: React.FC<PostsListComponent> = ({
+  contentRef,
+  username,
+  reload,
+}) => {
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(false);
   const [posts, setPosts] = useState<PostInterface[]>([]);
@@ -70,6 +75,10 @@ const PostsList: React.FC<PostsListComponent> = ({ contentRef, username }) => {
   useEffect(() => {
     getPosts();
   }, []); // eslint-disable-line
+
+  useEffect(() => {
+    getPosts();
+  }, [reload]); // eslint-disable-line
 
   useEffect(() => {
     if (!fetching)
