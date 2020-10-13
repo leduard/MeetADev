@@ -33,23 +33,6 @@ postsRouter.get("/", async (request, response) => {
   }
 });
 
-postsRouter.get("/:postId", async (request, response) => {
-  try {
-    const { postId } = request.params;
-
-    const postsRepo = getRepository(Post);
-
-    const post = await postsRepo.findOne({
-      where: { id: postId },
-      relations: ['user'],
-    });
-
-    return response.json(post);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
-});
-
 postsRouter.get("/:username", async (request, response) => {
   try {
     let { page } = request.query;
@@ -63,6 +46,23 @@ postsRouter.get("/:username", async (request, response) => {
     );
 
     return response.json(posts);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
+});
+
+postsRouter.get("/:username/:postId", async (request, response) => {
+  try {
+    const { username, postId } = request.params;
+
+    const postsRepo = getRepository(Post);
+
+    const post = await postsRepo.findOne({
+      where: { id: postId, user: { username: username } },
+      relations: ['user'],
+    });
+
+    return response.json(post);
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
