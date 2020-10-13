@@ -58,7 +58,7 @@ postsRouter.get("/:username/:postId", async (request, response) => {
     const postsRepo = getRepository(Post);
 
     const post = await postsRepo.findOne({
-      where: { id: postId, user: { username: username } },
+      where: { id: postId },
       relations: ['user'],
     });
 
