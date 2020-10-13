@@ -8,6 +8,7 @@ import Register from '../pages/Register';
 import Home from '../pages/Home';
 import Settings from '../pages/Settings';
 import Profile from '../pages/Profile';
+import Post from '../pages/Post';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -15,11 +16,7 @@ const Routes: React.FC = () => (
     <Route path="/login" exact component={Login} />
     <Route path="/register" exact component={Register} />
     <Route path="/settings" exact component={Settings} isPrivate />
-    <Route
-      path="/:username/s/:post_id"
-      component={() => <h1>post</h1>}
-      isPrivate
-    />
+    <Route path="/:username/s/:post_id" component={Post} isPrivate />
     <Route path="/:username" component={Profile} isPrivate />
   </Switch>
 );
