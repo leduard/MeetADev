@@ -27,7 +27,7 @@ const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<UserData>(
     (): UserData => {
-      const newUser = localStorage.getItem('@lesocial:user');
+      const newUser = localStorage.getItem('@MeetADev:user');
 
       if (newUser) return JSON.parse(newUser);
 
@@ -42,7 +42,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         password,
       });
 
-      localStorage.setItem('@lesocial:user', JSON.stringify(data));
+      localStorage.setItem('@MeetADev:user', JSON.stringify(data));
       setUser(data);
 
       return undefined;
@@ -57,7 +57,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const signOut = useCallback(() => {
-    localStorage.removeItem('@lesocial:user');
+    localStorage.removeItem('@MeetADev:user');
     setUser({} as UserData);
   }, []);
 

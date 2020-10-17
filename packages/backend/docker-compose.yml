@@ -1,12 +1,12 @@
-version: "3.1"
+version: '3.1'
 
 services:
   db:
-    container_name: lesocial_db
+    container_name: meetadev_db
     image: postgres
     restart: always
     ports:
       - 5433:5432
     environment:
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: lesocial
+      POSTGRES_DB: meetadev
