@@ -43,7 +43,7 @@ const Header: React.FC<HeaderComponent> = ({
           <FiHome size={24} />
           home
         </NavLink>
-        <NavLink to="settings">
+        <NavLink to="/settings">
           <FiSettings size={24} />
           ajustes
         </NavLink>
