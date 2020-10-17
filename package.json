@@ -1,9 +1,12 @@
 {
-  "name": "lesocial",
+  "name": "MeetADev",
   "version": "0.0.1",
   "main": "index.js",
-  "repository": "https://github.com/leduard/lesocial.git",
-  "author": "leduard <luizeduardo.patos@gmail.com>",
+  "repository": "https://github.com/leduard/MeetADev.git",
+  "author": {
+    "name": "Eduardo",
+    "url": "https://github.com/leduard"
+  },
   "license": "MIT",
   "private": "true",
   "workspaces": {

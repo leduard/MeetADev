@@ -1,7 +1,6 @@
 {
-  "name": "@lesocial/frontend",
+  "name": "@MeetADev/frontend",
   "version": "0.0.1",
-  "private": true,
   "dependencies": {
     "axios": "^0.20.0",
     "date-fns": "^2.16.1",
