@@ -9,7 +9,6 @@ export const Container = styled.div`
   align-items: stretch;
 
   color: #edebeb;
-  padding: 20px;
 `;
 
 export const App = styled.div`
