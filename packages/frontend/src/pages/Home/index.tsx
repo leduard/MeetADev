@@ -22,6 +22,7 @@ const Home: React.FC = () => {
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      if (!postContent) return;
       setPosting(true);
 
       await api.post(
