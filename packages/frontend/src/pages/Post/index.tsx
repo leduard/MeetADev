@@ -49,16 +49,21 @@ const Post: React.FC = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      const { data } = await api.get(`/posts/${username}/${postID}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      try {
+        const { data } = await api.get(`/posts/${username}/${postID}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      if (!data) setPostExists(false);
+        if (!data) setPostExists(false);
 
-      setPost(data);
-      setLoading(false);
+        setPost(data);
+        setLoading(false);
+      } catch (err) {
+        setPostExists(false);
+        setLoading(false);
+      }
     };
 
     getPost();
