@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { FiEdit, FiMail, FiTrash2 } from 'react-icons/fi';
 
 import {
@@ -13,7 +13,29 @@ import {
 
 import Header from '../../components/Header';
 
+import api from '../../services/api';
+import { useAuth } from '../../context/Auth';
+
+interface User {
+  id: string;
+  name: string;
+  username: string;
+  created_at: Date;
+  followers_count: number;
+  following_count: number;
+}
+
 const Settings: React.FC = () => {
+  const [newName, setNewName] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+  const nameRef = useRef<HTMLDivElement>(null);
+
+  const {
+    user: { user, token },
+  } = useAuth();
+
+  const handleNameEdit = useCallback(async () => {}, []);
+
   return (
     <Container>
       <Image />
@@ -21,13 +43,13 @@ const Settings: React.FC = () => {
         <Header showAppIcon />
         <Content>
           <ProfileCard>
-            <ProfileImage>L</ProfileImage>
+            <ProfileImage>{user.name.charAt(0)}</ProfileImage>
             <div>
               <div>
-                <h3>Luiz Eduardo</h3>
+                <h3 ref={nameRef}>{user.name}</h3>
                 <FiEdit size={20} />
               </div>
-              <h5>@leduardo</h5>
+              <h5>{`@${user.username}`}</h5>
             </div>
           </ProfileCard>
           <SettingsContainer>
