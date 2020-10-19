@@ -4,6 +4,7 @@ import api from '../services/api';
 interface User {
   id: string;
   username: string;
+  name: string;
 }
 
 interface UserData {

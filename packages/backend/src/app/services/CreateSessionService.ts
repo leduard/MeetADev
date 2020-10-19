@@ -26,7 +26,7 @@ class CreateSessionService {
     const userRepo = getRepository(User);
 
     const user = await await userRepo.findOne({
-      select: ["id", "username", "password"],
+      select: ["id", "name", "username", "password"],
       where: { username },
     });
 
