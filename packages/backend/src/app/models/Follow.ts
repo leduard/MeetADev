@@ -5,27 +5,33 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-} from "typeorm";
+} from 'typeorm';
 
-import User from "./User";
+import User from './User';
 
-@Entity("follows")
+@Entity('follows')
 class Follow {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne((type) => User, (user) => user.followers, { eager: true })
-  @JoinColumn({ name: "follower_id" })
+  @ManyToOne((type) => User, (user) => user.followers, {
+    eager: true,
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'follower_id' })
   follower: User;
 
-  @ManyToOne((type) => User, (user) => user.following, { eager: true })
-  @JoinColumn({ name: "user_id" })
+  @ManyToOne((type) => User, (user) => user.following, {
+    eager: true,
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @CreateDateColumn({ type: "timestamp with time zone" })
+  @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date;
 
-  @UpdateDateColumn({ type: "timestamp with time zone" })
+  @UpdateDateColumn({ type: 'timestamp with time zone' })
   updated_at: Date;
 }
 

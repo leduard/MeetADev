@@ -1,8 +1,8 @@
-import { EntityRepository, Repository, getCustomRepository } from "typeorm";
+import { EntityRepository, Repository, getCustomRepository } from 'typeorm';
 
-import Post from "../models/Post";
+import Post from '../models/Post';
 
-import CustomFollowRepository from "../../app/repositories/FollowRepository";
+import CustomFollowRepository from '../../app/repositories/FollowRepository';
 
 interface AllRepositoryResponse {
   currentPage: number;
@@ -18,7 +18,7 @@ class PostRepository extends Repository<Post> {
     authenticated_user: string
   ): Promise<AllRepositoryResponse | {}> {
     const itemsPerPage = parseInt(process.env.ROUTES_ITEMS_PER_PAGE as any);
-    page = page.toString() === "" ? 1 : page;
+    page = page.toString() === '' ? 1 : page;
 
     const followRepo = getCustomRepository(CustomFollowRepository);
     const { following: followingUsers } = await followRepo.getFollowing({
@@ -29,19 +29,19 @@ class PostRepository extends Repository<Post> {
       ? followingUsers?.map((user) => user.id)
       : [];
 
-    let [allPosts, postsCount] = await this.createQueryBuilder("posts")
-      .leftJoinAndSelect("posts.user", "user")
+    let [allPosts, postsCount] = await this.createQueryBuilder('posts')
+      .leftJoinAndSelect('posts.user', 'user')
       .where(
         `${
           followingUsersIds.length
-            ? "user.id IN (:...followers)"
-            : "false = true"
+            ? 'user.id IN (:...followers)'
+            : 'false = true'
         }`,
         {
           followers: followingUsersIds,
         }
       )
-      .addOrderBy("posts.created_at", "ASC")
+      .addOrderBy('posts.created_at', 'ASC')
       .skip(page * itemsPerPage - itemsPerPage)
       .take(itemsPerPage)
       .getManyAndCount();

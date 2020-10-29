@@ -6,14 +6,14 @@ import {
   RelationCount,
   CreateDateColumn,
   UpdateDateColumn,
-} from "typeorm";
+} from 'typeorm';
 
-import Post from "./Post";
-import Follow from "./Follow";
+import Post from './Post';
+import Follow from './Follow';
 
-@Entity("users")
+@Entity('users')
 class User {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
@@ -31,10 +31,12 @@ class User {
   @OneToMany((type) => Post, (post) => post.user, { onDelete: 'CASCADE' })
   posts: Post[];
 
-  @OneToMany((type) => Follow, (follow) => follow.follower)
+  @OneToMany((type) => Follow, (follow) => follow.follower, {
+    onDelete: 'CASCADE',
+  })
   following: User[];
 
-  @OneToMany((type) => Follow, (follow) => follow.user)
+  @OneToMany((type) => Follow, (follow) => follow.user, { onDelete: 'CASCADE' })
   followers: User[];
 
   @RelationCount((user: User) => user.followers)
@@ -43,10 +45,10 @@ class User {
   @RelationCount((user: User) => user.following)
   following_count: number;
 
-  @CreateDateColumn({ type: "timestamp with time zone" })
+  @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date;
 
-  @UpdateDateColumn({ type: "timestamp with time zone" })
+  @UpdateDateColumn({ type: 'timestamp with time zone' })
   updated_at: Date;
 }
 

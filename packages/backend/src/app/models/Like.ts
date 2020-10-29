@@ -15,11 +15,11 @@ class Likes {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne((type) => User, (user) => user.id)
+  @ManyToOne((type) => User, (user) => user.id, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user_id: User[];
 
-  @ManyToOne((type) => Post, (post) => post.id)
+  @ManyToOne((type) => Post, (post) => post.id, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'post_id' })
   post_id: Post[];
 

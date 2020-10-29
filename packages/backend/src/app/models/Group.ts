@@ -20,11 +20,14 @@ class Group {
   @Column()
   name: string;
 
-  @OneToOne((type) => User, (user) => user.id, { nullable: false })
+  @OneToOne((type) => User, (user) => user.id, {
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'admin_id' })
   admin: User;
 
-  @ManyToMany((type) => User, (user) => user.id)
+  @ManyToMany((type) => User, (user) => user.id, { onDelete: 'CASCADE' })
   @JoinTable({
     name: 'group_members',
     joinColumn: {
